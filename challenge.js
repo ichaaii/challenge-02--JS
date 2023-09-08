@@ -152,7 +152,7 @@ function getInfoPenjualan(dataPenjualanBuku) {
 
     totalModal += data.hargaBeli * data.totalTerjual;
 
-    //Perjitungan keuntungan dan Modal semuanya bersama sisa stok
+    //Perhitungan keuntungan dan Modal semuanya bersama sisa stok
     // const keuntungan = data.hargaJual * data.totalTerjual -
     // data.hargaBeli * (data.sisaStok + data.totalTerjual)
     // totalKeuntungan += keuntungan;
