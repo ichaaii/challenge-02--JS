@@ -14,9 +14,9 @@ console.log(changeWord("bromo", "semeru", kalimat2));
 
 //soal no 2
 const checkTypeNumber = (givenNumber) => {
-  if ( typeof givenNumber === "undefined") {
+  if (typeof givenNumber === "undefined") {
     return "Error : Bro where is the parameter?";
-  } else if ( typeof (givenNumber) !== "number") {
+  } else if (typeof givenNumber !== "number") {
     return "Error : Invalid data type";
   } else if (givenNumber % 2 === 0) {
     return "GENAP";
@@ -34,123 +34,158 @@ console.log(checkTypeNumber([]));
 console.log(checkTypeNumber());
 
 //soal no 3
-function getAngkaTerbesarKedua (dataAngka){
+function getAngkaTerbesarKedua(dataAngka) {
   if (typeof dataAngka === "undefined") {
     return "Error : Bro where is the parameter?";
   }
-  if (!dataAngka){
-    return "Error : The values entered do not match"
+  if (!dataAngka) {
+    return "Error : The values entered do not match";
   }
-  const sorting = dataAngka.sort(function(a,b){
-    return b-a
-  })
-  return sorting[1]
+  const sorting = dataAngka.sort(function (a, b) {
+    return b - a;
+  });
+  return sorting[1];
 }
-const dataAngka = [9,4,7,7,4,3,2,2,8];
+const dataAngka = [9, 4, 7, 7, 4, 3, 2, 2, 8];
 
-console.log("\nSoal 3")
-console.log(getAngkaTerbesarKedua(dataAngka))
-console.log(getAngkaTerbesarKedua(0))
-console.log(getAngkaTerbesarKedua())
+console.log("\nSoal 3");
+console.log(getAngkaTerbesarKedua(dataAngka));
+console.log(getAngkaTerbesarKedua(0));
+console.log(getAngkaTerbesarKedua());
 
 //soal no 4
 const dataPenjualanPakAldi = [
-    {
-      namaProduct : 'Sepatu Futsal Nike Vapor Academy 8',
-      hargaSatuan: 760000,
-      kategori : "Sepatu Sport",
-      totalTerjual : 90,
-    },
-    {
-      namaProduct : 'Sepatu Warrior Tristan Black Brown High',
-      hargaSatuan: 960000,
-      kategori : "Sepatu Sneaker",
-      totalTerjual : 37,
-    },
-    {
-      namaProduct : 'Sepatu Warrior Tristan Maroon High ',
-      kategori : "Sepatu Sneaker",
-      hargaSatuan: 360000,
-      totalTerjual : 90,
-    },
-    {
-      namaProduct : 'Sepatu Warrior Rainbow Tosca Corduroy',
-      hargaSatuan: 120000,
-      kategori : "Sepatu Sneaker",
-      totalTerjual : 90,
+  {
+    namaProduct: "Sepatu Futsal Nike Vapor Academy 8",
+    hargaSatuan: 760000,
+    kategori: "Sepatu Sport",
+    totalTerjual: 90,
+  },
+  {
+    namaProduct: "Sepatu Warrior Tristan Black Brown High",
+    hargaSatuan: 960000,
+    kategori: "Sepatu Sneaker",
+    totalTerjual: 37,
+  },
+  {
+    namaProduct: "Sepatu Warrior Tristan Maroon High ",
+    kategori: "Sepatu Sneaker",
+    hargaSatuan: 360000,
+    totalTerjual: 90,
+  },
+  {
+    namaProduct: "Sepatu Warrior Rainbow Tosca Corduroy",
+    hargaSatuan: 120000,
+    kategori: "Sepatu Sneaker",
+    totalTerjual: 90,
+  },
+];
+
+function getTotalPenjualan(dataPenjualanSepatu) {
+  if (typeof dataPenjualanSepatu === "undefined") {
+    return "Error : Bro where is the parameter?";
+  }
+  let totalpenjualan = 0;
+
+  dataPenjualanSepatu.forEach((data) => {
+    totalpenjualan += data.totalTerjual;
+  });
+  return totalpenjualan;
+}
+
+console.log("\nSoal 4");
+console.log(getTotalPenjualan(dataPenjualanPakAldi));
+
+//soal no 5
+const dataPenjualanNovel = [
+  {
+    idProduct: "BOOK002421",
+    namaProduk: "Pulang - Pergi",
+    penulis: "Tere Liye",
+    hargaBeli: 60000,
+    hargaJual: 86000,
+    totalTerjual: 150,
+    sisaStok: 17,
+  },
+  {
+    idProduct: "BOOK002351",
+    namaProduk: "Selamat Tinggal",
+    penulis: "Tere Liye",
+    hargaBeli: 75000,
+    hargaJual: 103000,
+    totalTerjual: 171,
+    sisaStok: 20,
+  },
+  {
+    idProduct: "BOOK002941",
+    namaProduk: "Garis Waktu",
+    penulis: "Fiersa Besari",
+    hargaBeli: 67000,
+    hargaJual: 99000,
+    totalTerjual: 213,
+    sisaStok: 5,
+  },
+  {
+    idProduct: "BOOK002941",
+    namaProduk: "Laskar Pelangi",
+    penulis: "Andrea Hirata",
+    hargaBeli: 55000,
+    hargaJual: 68000,
+    totalTerjual: 20,
+    sisaStok: 56,
+  },
+];
+
+function getInfoPenjualan(dataPenjualanBuku) {
+  let totalKeuntungan = 0;
+  let totalModal = 0;
+  let produkBukuTerlaris = "";
+  let penulisTerlaris = "";
+  let bukuTerlaris = 0;
+  let persentaseKeuntungan = 0;
+
+  dataPenjualanBuku.forEach((data) => {
+
+    //Perhitungan keuntungan dan Modal hari ini saja
+    const keuntungan = (data.hargaJual - data.hargaBeli) * data.totalTerjual;
+    totalKeuntungan += keuntungan;
+
+    totalModal += data.hargaBeli * data.totalTerjual;
+
+    //Perjitungan keuntungan dan Modal semuanya bersama sisa stok
+    // const keuntungan = data.hargaJual * data.totalTerjual -
+    // data.hargaBeli * (data.sisaStok + data.totalTerjual)
+    // totalKeuntungan += keuntungan;
+    // totalModal += data.hargaBeli * (data.sisaStok + data.totalTerjual);
+
+    if (data.totalTerjual > bukuTerlaris) {
+      bukuTerlaris = data.totalTerjual;
+      produkBukuTerlaris = data.namaProduk;
+      penulisTerlaris = data.penulis;
     }
-  ]
+  });
 
-  // function getTotalPenjualan(dataPenjualanSepatu){
-  //   if(!Array.isArray(dataPenjualanSepatu)){
-  //     return "Harus berupa array";
-  //   }
+  // Menghitung persentase keuntungan
+  persentaseKeuntungan =
+    ((totalKeuntungan / totalModal) * 100).toFixed(2) + " %";
 
-  //   const totalPenjualan = dataPenjualanSepatu.reduce((total, sepatu) => {
-  //     if(sepatu.totalTerjual && typeof sepatu.totalTerjual === "number"){
-  //       return total + sepatu.toatalTerjual;
-  //     }
-  //     else {
-  //       return total;
-  //     }
-  //   }, 0);
+  // Membuat objek hasil
+  const hasil = {
+    totalKeuntungan: formatRupiah(totalKeuntungan),
+    totalModal: formatRupiah(totalModal),
+    persentaseKeuntungan,
+    produkBukuTerlaris,
+    penulisTerlaris,
+  };
+  return hasil;
+}
 
-  //   return totalPenjualan;
-  // }
+const formatRupiah = (number) => {
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+  }).format(number);
+};
 
-
-  function getTotalPenjualan(dataPenjualanSepatu){
-    return dataPenjualanSepatu.reduce((a, b) => {
-      return {
-        totalTerjual : a.totalTerjual + b.totalTerjual
-      }
-    })
-  }
-  console.log("\nSoal 4");
-  console.log(getTotalPenjualan(dataPenjualanPakAldi))
-
-  //soal no 5
-  const dataPenjualanNovel = [
-    {
-      idProduct: 'BOOK002421',
-      namaProduk: 'Pulang - Pergi',
-      penulis: 'Tere Liye',
-      hargaBeli: 60000,
-      hargaJual: 86000,
-      totalTerjual: 150,
-      sisaStok: 17,
-    },
-    {
-      idProduct: 'BOOK002351',
-      namaProduk: 'Selamat Tinggal',
-      penulis: 'Tere Liye',
-      hargaBeli: 75000,
-      hargaJual: 103000,
-      totalTerjual: 171,
-      sisaStok: 20,
-    },
-    {
-      idProduct: 'BOOK002941',
-      namaProduk: 'Garis Waktu',
-      penulis: 'Fiersa Besari',
-      hargaBeli: 67000,
-      hargaJual: 99000,
-      totalTerjual: 213,
-      sisaStok: 5,
-    },
-    {
-      idProduct: 'BOOK002941',
-      namaProduk: 'Laskar Pelangi',
-      penulis: 'Andrea Hirata',
-      hargaBeli: 55000,
-      hargaJual: 68000,
-      totalTerjual: 20,
-      sisaStok: 56,
-    },
-  ];
-
-  function getInfoPenjualan(dataPenjualanBuku){
-
-  }
-
-  console
+console.log("\nSoal 5");
+console.log(getInfoPenjualan(dataPenjualanNovel));
